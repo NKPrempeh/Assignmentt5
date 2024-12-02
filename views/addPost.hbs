@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <h1 class="text-center mb-4" style="font-family: 'Arial', sans-serif; color: #0056b3;">Add a New Post</h1>
+
+    <form method="post" action="/posts/add" enctype="multipart/form-data">
+        <!-- Feature Image -->
+        <div class="form-group">
+            <label for="featureImage" style="color: #0056b3; font-weight: bold;">Feature Image:</label>
+            <input type="file" id="featureImage" name="featureImage" class="form-control-file" required>
+        </div>
+
+        <!-- Post Content -->
+        <div class="form-group">
+            <label for="title" style="color: #0056b3;">Title:</label>
+            <input type="text" id="title" name="title" class="form-control" placeholder="Enter the post title" required style="border-color: #0056b3;">
+        </div>
+
+        <div class="form-group">
+            <label for="body" style="color: #0056b3;">Body:</label>
+            <textarea id="body" name="body" class="form-control" rows="12" placeholder="Write your post content here..." required style="border-color: #0056b3;"></textarea>
+        </div>
+
+        <!-- Category Selection -->
+        <div class="form-group">
+            <label for="category" style="color: #0056b3;">Category:</label>
+            {{#if categories}}
+                <select class="form-control" name="category" id="category" required style="border-color: #0056b3;">
+                    <option value="" disabled selected>Select a category</option>
+                    {{#each categories}}
+                        <option value="{{id}}">{{category}}</option>
+                    {{/each}}
+                </select>
+            {{else}}
+                <div style="color: #0056b3;">No Categories</div>
+            {{/if}}
+        </div>
+
+        <!-- Visibility -->
+        <div class="form-group form-check">
+            <input type="checkbox" id="published" name="published" class="form-check-input">
+            <label for="published" class="form-check-label" style="color: #0056b3;">Published</label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary btn-block" style="background-color: #0056b3; border-color: #0056b3;">Add Post</button>
+    </form>
+</div>

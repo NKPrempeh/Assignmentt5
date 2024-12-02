@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-md-12">
+        <h2>Posts</h2>
+        <hr />
+        
+        <!-- Add Post Button -->
+        <a href="/posts/add" class="btn btn-primary mb-3" style="background-color: #0056b3; border-color: #0056b3;">Add Post</a>
+        
+        <!-- Table to display posts -->
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Post ID</th>
+                        <th>Title</th>
+                        <th>Post Date</th>
+                        <th>Category</th>
+                        <th>Published</th>
+                        <th>Body</th> <!-- Added a new column for the body -->
+                        <th></th> <!-- Empty header for Remove button -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each posts}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.title}}</td>
+                        <td>{{this.postDate}}</td>
+                        <td><a href="/posts?category={{this.category}}">{{this.category}}</a></td>
+                        <td>{{#if this.published}}True{{else}}False{{/if}}</td>
+                        <td>
+                            <!-- Render post body with safeHTML helper -->
+                            <div>{{#safeHTML this.body}}{{/safeHTML}}</div>
+                        </td>
+                        <td>
+                            <!-- Remove Post Button -->
+                            <a href="/posts/delete/{{this.id}}" class="btn btn-danger">Remove</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Message if no posts are available -->
+        {{#unless posts.length}}
+        <div class="col-md-12 text-center">
+            <strong>{{message}}</strong>
+        </div>
+        {{/unless}}
+    </div>
+</div>
